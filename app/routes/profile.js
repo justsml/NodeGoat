@@ -1,10 +1,6 @@
 var ProfileDAO = require("../data/profile-dao").ProfileDAO;
 var ESAPI = require('node-esapi')
 
-function sanitizeHTML(html) {
-    return html.replace(/\<|\>/ig, '')
-}
-
 /* The ProfileHandler must be constructed with a connected db */
 function ProfileHandler(db) {
     "use strict";
@@ -35,13 +31,13 @@ function ProfileHandler(db) {
 
     this.handleProfileUpdate = function (req, res, next) {
 
-        var firstName = sanitizeHTML(req.body.firstName);
-        var lastName = sanitizeHTML(req.body.lastName);
-        var ssn = sanitizeHTML(req.body.ssn);
-        var dob = sanitizeHTML(req.body.dob);
-        var address = sanitizeHTML(req.body.address);
-        var bankAcc = sanitizeHTML(req.body.bankAcc);
-        var bankRouting = sanitizeHTML(req.body.bankRouting);
+        var firstName = req.body.firstName;
+        var lastName = req.body.lastName;
+        var ssn = req.body.ssn;
+        var dob = req.body.dob;
+        var address = req.body.address;
+        var bankAcc = req.body.bankAcc;
+        var bankRouting = req.body.bankRouting;
 
         // Fix for Section: ReDoS attack
         // The following regexPattern that is used to validate the bankRouting number is insecure and vulnerable to
